@@ -8,6 +8,26 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
 .env
 .env.local
 *.xml
