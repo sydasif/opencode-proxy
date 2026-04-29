@@ -20,4 +20,5 @@ USER app
 EXPOSE 4000
 
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["litellm", "--config", "/app/config.yaml", "--host", "0.0.0.0", "--port", "4000"]
+
+CMD ["litellm", "--config", "/app/config.yaml"]
