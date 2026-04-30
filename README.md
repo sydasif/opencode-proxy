@@ -59,27 +59,27 @@ To redirect `opencode` to your local proxy, update your global `opencode.json` f
 
 ```json
 {
-    "$schema": "https://opencode.ai/config.json",
-    "provider": {
-        "litellm": {
-            "npm": "@ai-sdk/openai-compatible",
-            "name": "LiteLLM",
-            "options": {
-                "baseURL": "http://localhost:4000/v1"
-            },
-            "models": {
-                "gemini/gemma-4-31b-it": {
-                    "name": "Gemma-4-31b"
-                },
-                "gemini/gemma-4-26b-a4b-it": {
-                    "name": "Gemma-4-26b"
-                },
-                "gemini/gemini-3.1-flash-lite-preview": {
-                    "name": "Gemini-3.1-flash-lite"
-                }
-            }
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "litellm": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LiteLLM",
+      "options": {
+        "baseURL": "http://localhost:4000/v1"
+      },
+      "models": {
+        "gemini/gemma-4-31b-it": {
+          "name": "Gemma-4-31b"
+        },
+        "gemini/gemma-4-26b-a4b-it": {
+          "name": "Gemma-4-26b"
+        },
+        "gemini/gemini-3.1-flash-lite-preview": {
+          "name": "Gemini-3.1-flash-lite"
         }
+      }
     }
+  }
 }
 ```
 
@@ -125,12 +125,12 @@ docker compose up -d
 
 ---
 
-| Action | Command |
-| :--- | :--- |
-| **Start Proxy** | `docker compose up -d` |
-| **Stop Proxy** | `docker compose down` |
-| **View Logs** | `docker compose logs -f` |
-| **Restart** | `docker compose restart` |
+| Action          | Command                  |
+| :-------------- | :----------------------- |
+| **Start Proxy** | `docker compose up -d`   |
+| **Stop Proxy**  | `docker compose down`    |
+| **View Logs**   | `docker compose logs -f` |
+| **Restart**     | `docker compose restart` |
 
 ---
 
