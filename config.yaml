@@ -16,3 +16,6 @@ model_list:
       model: gemini/gemini-3.1-flash-lite-preview
       api_key: os.environ/GEMINI_API_KEY
       rpm: 15
+
+litellm_settings:
+  drop_params: true
