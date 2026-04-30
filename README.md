@@ -4,7 +4,7 @@
 [![LiteLLM](https://img.shields.io/badge/Powered%20by-LiteLLM-blueviolet?style=for-the-badge)](https://github.com/BerriAI/litellm)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-A high-performance [LiteLLM](https://github.com/BerriAI/litellm) proxy that seamlessly maps OpenCode CLI to Google's Gemini models. This allows you to use `opencode`, while leveraging the power and cost-efficiency of Gemini Gemma 4 models.
+A high-performance [LiteLLM](https://github.com/BerriAI/litellm) proxy that seamlessly maps OpenCode and Claude Code CLI to Google's Gemini models. This allows you to use the power and cost-efficiency of Gemini Gemma 4 models.
 
 ---
 
@@ -79,16 +79,25 @@ To redirect `opencode` to your local proxy, update your global `opencode.json` f
                 }
             }
         }
-    },
-    "mcp": {
-        "web-search": {
-            "type": "local",
-            "command": [
-                "web-search-mcp"
-            ],
-            "enabled": true
-        }
     }
+}
+```
+
+---
+
+## 🤖 Using with Claude Code
+
+To redirect `claude` to your local proxy, update your global `settings.json` file:
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://localhost:4000/",
+    "ANTHROPIC_AUTH_TOKEN": "sk-xxx",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "gemma-4-31b-it",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "gemini-3.1-flash-lite-preview",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "gemma-4-26b-a4b-it"
+  }
 }
 ```
 
