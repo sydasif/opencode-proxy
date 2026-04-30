@@ -1,7 +1,7 @@
 # 🚀 Opencode Proxy
 
-[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![LiteLLM](https://img.shields.io/badge/Powered%20by-LiteLLM-blueviolet?style=for-the-badge)](https://github.com/BerriAI/litellm)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 A high-performance [LiteLLM](https://github.com/BerriAI/litellm) proxy that seamlessly maps OpenCode and Claude Code CLI to Google's Gemini models. This allows you to use the power and cost-efficiency of Gemini Gemma 4 models.
