@@ -1,7 +1,7 @@
 services:
-  gemini-proxy:
+  client:
     build: .
-    container_name: opencode-proxy
+    container_name: opencode
     ports:
       - "4000:4000"
     volumes:
