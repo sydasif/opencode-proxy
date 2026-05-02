@@ -4,7 +4,7 @@
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-A high-performance [LiteLLM](https://github.com/BerriAI/litellm) proxy that seamlessly maps OpenCode, Claude Code CLI and Zed editor to Google's Gemini models. This allows you to use the power and cost-efficiency of Gemini Gemma 4 models.
+A high-performance [LiteLLM](https://github.com/BerriAI/litellm) proxy that seamlessly maps `opencode` and `claude` code CLI to Google's `Gemma 4` models, allows you to use the power and cost-efficiency of `Gemma 4` models.
 
 ---
 
@@ -13,7 +13,7 @@ A high-performance [LiteLLM](https://github.com/BerriAI/litellm) proxy that seam
 - 🐳 **Docker Native**: Official LiteLLM image, no build step — instant deployment.
 - ⚙️ **Customizable**: Separate configs per service via isolated subdirectories.
 - 🔐 **Secure**: Environment-based API key management with per-service isolation.
-- 🔀 **Multi-Service**: Run OpenCode/Claude and Zed proxies side-by-side with different keys and models.
+- 🔀 **Multi-Service**: Run OpenCode/Claude proxies side-by-side with different keys and models.
 
 ---
 
@@ -22,14 +22,14 @@ A high-performance [LiteLLM](https://github.com/BerriAI/litellm) proxy that seam
 ```
 litellm-proxy/
 ├── docker-compose.yml
-├── .env              # Shared API keys
+├── .env              # API keys
 ├── .gitignore
 ├── AGENTS.md
 ├── README.md
 ├── opencode/
 │   └── config.yaml       # OpenCode model mappings
-└── zed/
-    └── config.yaml       # Zed model mappings
+└── claude/
+    └── config.yaml       # Claude model mappings
 ```
 
 ---
@@ -50,17 +50,17 @@ Before you begin, ensure you have the following installed:
 
 ```bash
 cp .env.example .env
-# Edit .env and add your OPENCODE_GEMINI_API_KEY and ZED_GEMINI_API_KEY values
+# Edit .env and add your OPENCODE_GEMINI_API_KEY and CLAUDE_GEMINI_API_KEY values
 ```
 
-### 2. Deploy Both Proxies
+### 2. Deploy Proxy
 
 ```bash
 docker compose up -d
 ```
 
-- OpenCode/Claude proxy is now running at `http://localhost:4000`
-- Zed proxy is now running at `http://localhost:4001`
+- OpenCode proxy is now running at `http://localhost:4000`
+- Claude proxy is now running at `http://localhost:4001`
 
 ---
 
@@ -103,57 +103,11 @@ To redirect `claude` to your local proxy, update your global `settings.json` fil
 ```json
 {
   "env": {
-    "ANTHROPIC_BASE_URL": "http://localhost:4000/",
+    "ANTHROPIC_BASE_URL": "http://localhost:4001/",
     "ANTHROPIC_AUTH_TOKEN": "sk-xxx",
     "ANTHROPIC_DEFAULT_SONNET_MODEL": "gemma-4-31b-it",
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "gemini-3.1-flash-lite-preview",
     "ANTHROPIC_DEFAULT_HAIKU_MODEL": "gemma-4-26b-a4b-it"
-  }
-}
-```
-
----
-
-## 🤖 Using with Zed editor
-
-To redirect `zed` editor to your local proxy, update your global `settings.json` file:
-
-```json
-{
-  "language_models": {
-    "openai_compatible": {
-      "LiteLLM": {
-        "api_url": "http://localhost:4001/v1",
-        "available_models": [
-          {
-            "name": "gemma-4-31b-it",
-            "max_tokens": 262144,
-            "max_output_tokens": 32768,
-            "max_completion_tokens": 262144,
-            "capabilities": {
-              "tools": true,
-              "images": true,
-              "parallel_tool_calls": false,
-              "prompt_cache_key": false,
-              "chat_completions": true
-            }
-          },
-          {
-            "name": "gemma-4-26b-a4b-it",
-            "max_tokens": 262144,
-            "max_output_tokens": 32768,
-            "max_completion_tokens": 262144,
-            "capabilities": {
-              "tools": true,
-              "images": true,
-              "parallel_tool_calls": false,
-              "prompt_cache_key": false,
-              "chat_completions": true
-            }
-          }
-        ]
-      }
-    }
   }
 }
 ```
@@ -188,11 +142,11 @@ docker compose up -d
 | **Stop All**                | `docker compose down`                         |
 | **View Logs (All)**         | `docker compose logs -f`                      |
 | **View Logs (OpenCode)**    | `docker compose logs -f opencode-proxy`       |
-| **View Logs (Zed)**         | `docker compose logs -f zed-proxy`            |
+| **View Logs (Claude)**      | `docker compose logs -f claude-proxy`         |
 | **Restart**                 | `docker compose restart`                      |
 | **Update Image**            | `docker compose pull && docker compose up -d` |
 | **Health Check (OpenCode)** | `curl http://localhost:4000/health`           |
-| **Health Check (Zed)**      | `curl http://localhost:4001/health`           |
+| **Health Check (Claude)**   | `curl http://localhost:4001/health`           |
 
 ---
 

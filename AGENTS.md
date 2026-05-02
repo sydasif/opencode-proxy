@@ -1,28 +1,56 @@
-# AGENTS.md - Opencode Proxy
+# AGENTS.md
 
-## Purpose
+## What This Repo Is
 
-LiteLLM proxy that maps OpenCode CLI to Google Gemini models. Runs alongside a Zed proxy using the same official LiteLLM image with isolated configs and API keys.
+- **LiteLLM proxy** - Docker containers that expose OpenCode and Claude code CLI APIs to Google's Gemma models
+- **Not a Python codebase** - No source code to develop; config-driven Docker deployment
 
-## Operational Commands
+## Key Commands
 
-- **Start All**: `docker compose up -d`
-- **Stop All**: `docker compose down`
-- **View Logs (All)**: `docker compose logs -f`
-- **View Logs (OpenCode)**: `docker compose logs -f opencode-proxy`
-- **View Logs (Zed)**: `docker compose logs -f zed-proxy`
-- **Restart**: `docker compose restart`
-- **Update Image**: `docker compose pull && docker compose up -d`
+```bash
+# Start proxies
+docker compose up -d
 
-## Configuration
+# View logs
+docker compose logs -f opencode-proxy   # or: -f claude-proxy
+docker compose logs -f              # all
 
-- **Model Mappings**: Defined in `opencode/config.yaml` and `zed/config.yaml`.
-- **API Keys**: Managed via a single root `.env` file, requiring `OPENCODE_GEMINI_API_KEY` and `ZED_GEMINI_API_KEY`.
-- **Proxy Endpoints**: OpenCode → `http://localhost:4000/v1`, Zed → `http://localhost:4001/v1`
+# Restart/update
+docker compose restart
+docker compose pull && docker compose up -d
 
-## Project Structure
+# Health checks
+curl http://localhost:4000/health   # OpenCode proxy
+curl http://localhost:4001/health    # Claude proxy
+```
 
-- `.env` — Shared API keys
-- `opencode/` — OpenCode proxy config
-- `zed/` — Zed proxy config
-- `docker-compose.yml` — launches both services from the official LiteLLM image
+## Architecture
+
+- `opencode-proxy` → runs on port 4000, config in `opencode/config.yaml`
+- `claude-proxy` → runs on port 4001, config in `claude/config.yaml`
+- Both use official `docker.litellm.ai/berriai/litellm:main-stable` image
+- Environment variables loaded from `.env` (never commit this)
+
+## Config Structure
+
+Each `config.yaml` defines:
+- `model_list` - available models and their LiteLLM mappings
+- `litellm_params` - API key via `os.environ/VAR_NAME`, RPM limits
+- `litellm_settings.drop_params` - drop unsupported params
+
+Model naming: internal name (e.g., `gemma-4-31b-it`) maps to LiteLLM model (e.g., `gemini/gemma-4-31b-it`).
+
+## Setup
+
+```bash
+cp .env.example .env
+# Add required API keys:
+# OPENCODE_GEMINI_API_KEY
+# CLAUDE_GEMINI_API_KEY
+```
+
+## Changing Ports or Models
+
+1. Edit `docker-compose.yml` for ports
+2. Edit `opencode/config.yaml` or `claude/config.yaml` for models
+3. Restart: `docker compose down && docker compose up -d`

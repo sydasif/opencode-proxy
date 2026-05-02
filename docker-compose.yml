@@ -11,13 +11,13 @@ services:
     command: ["--config", "/app/config.yaml"]
     restart: unless-stopped
 
-  zed-proxy:
+  claude-proxy:
     image: docker.litellm.ai/berriai/litellm:main-stable
-    container_name: zed
+    container_name: claude
     ports:
       - "4001:4000"
     volumes:
-      - ./zed/config.yaml:/app/config.yaml
+      - ./claude/config.yaml:/app/config.yaml
     env_file:
       - ./.env
     command: ["--config", "/app/config.yaml"]
