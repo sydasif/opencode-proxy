@@ -7,7 +7,7 @@ services:
     volumes:
       - ./opencode/config.yaml:/app/config.yaml
     env_file:
-      - ./opencode/.env
+      - ./.env
     command: ["--config", "/app/config.yaml"]
     restart: unless-stopped
 
@@ -19,6 +19,6 @@ services:
     volumes:
       - ./zed/config.yaml:/app/config.yaml
     env_file:
-      - ./zed/.env
+      - ./.env
     command: ["--config", "/app/config.yaml"]
     restart: unless-stopped
