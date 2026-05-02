@@ -1,15 +1,24 @@
 services:
-  client:
-    build: .
+  opencode-proxy:
+    image: docker.litellm.ai/berriai/litellm:main-stable
     container_name: opencode
     ports:
       - "4000:4000"
     volumes:
-      - ./config.yaml:/app/config.yaml
+      - ./opencode/config.yaml:/app/config.yaml
     env_file:
-      - .env
+      - ./opencode/.env
+    command: ["--config", "/app/config.yaml"]
+    restart: unless-stopped
 
-    environment:
-      - GEMINI_API_KEY=${GEMINI_API_KEY}
-
+  zed-proxy:
+    image: docker.litellm.ai/berriai/litellm:main-stable
+    container_name: zed
+    ports:
+      - "4001:4000"
+    volumes:
+      - ./zed/config.yaml:/app/config.yaml
+    env_file:
+      - ./zed/.env
+    command: ["--config", "/app/config.yaml"]
     restart: unless-stopped
