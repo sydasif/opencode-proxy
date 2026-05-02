@@ -22,15 +22,14 @@ A high-performance [LiteLLM](https://github.com/BerriAI/litellm) proxy that seam
 ```
 litellm-proxy/
 ├── docker-compose.yml
+├── .env              # Shared API keys
 ├── .gitignore
 ├── AGENTS.md
 ├── README.md
 ├── opencode/
-│   ├── config.yaml       # OpenCode model mappings
-│   └── .env              # OpenCode Gemini API key
+│   └── config.yaml       # OpenCode model mappings
 └── zed/
-    ├── config.yaml       # Zed model mappings
-    └── .env              # Zed Gemini API key
+    └── config.yaml       # Zed model mappings
 ```
 
 ---
@@ -50,9 +49,8 @@ Before you begin, ensure you have the following installed:
 ### 1. Configure Environment
 
 ```bash
-cp opencode/.env.example opencode/.env
-cp zed/.env.example zed/.env
-# Edit both .env files and add your GEMINI_API_KEY values
+cp .env.example .env
+# Edit .env and add your OPENCODE_GEMINI_API_KEY and ZED_GEMINI_API_KEY values
 ```
 
 ### 2. Deploy Both Proxies

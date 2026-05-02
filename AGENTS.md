@@ -17,11 +17,12 @@ LiteLLM proxy that maps OpenCode CLI to Google Gemini models. Runs alongside a Z
 ## Configuration
 
 - **Model Mappings**: Defined in `opencode/config.yaml` and `zed/config.yaml`.
-- **API Keys**: Managed via per-service `.env` files (`opencode/.env`, `zed/.env`), each requiring `GEMINI_API_KEY`.
+- **API Keys**: Managed via a single root `.env` file, requiring `OPENCODE_GEMINI_API_KEY` and `ZED_GEMINI_API_KEY`.
 - **Proxy Endpoints**: OpenCode → `http://localhost:4000/v1`, Zed → `http://localhost:4001/v1`
 
 ## Project Structure
 
-- `opencode/` — OpenCode proxy config and environment
-- `zed/` — Zed proxy config and environment
+- `.env` — Shared API keys
+- `opencode/` — OpenCode proxy config
+- `zed/` — Zed proxy config
 - `docker-compose.yml` — launches both services from the official LiteLLM image
