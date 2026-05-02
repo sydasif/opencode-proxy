@@ -116,6 +116,52 @@ To redirect `claude` to your local proxy, update your global `settings.json` fil
 
 ---
 
+## 🤖 Using with Zed editor
+
+To redirect `zed` editor to your local proxy, update your global `settings.json` file:
+
+```json
+{
+  "language_models": {
+    "openai_compatible": {
+      "LiteLLM": {
+        "api_url": "http://localhost:4001/v1",
+        "available_models": [
+          {
+            "name": "gemma-4-31b-it",
+            "max_tokens": 262144,
+            "max_output_tokens": 32768,
+            "max_completion_tokens": 262144,
+            "capabilities": {
+              "tools": true,
+              "images": true,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "gemma-4-26b-a4b-it",
+            "max_tokens": 262144,
+            "max_output_tokens": 32768,
+            "max_completion_tokens": 262144,
+            "capabilities": {
+              "tools": true,
+              "images": true,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+---
+
 ## 🔧 Docker Customization
 
 If you need to change the default port (e.g., due to a conflict), modify the `ports` section in `docker-compose.yml`:
